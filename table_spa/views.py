@@ -1,5 +1,6 @@
 from rest_framework import generics
 from table_spa.models import Table
+from table_spa.pagination import MyPagination
 from table_spa.serializers import TableSerializers
 
 
@@ -13,6 +14,8 @@ class TableListCreateView(generics.ListCreateAPIView):
     Атрибуты:
         - queryset: Запрос к базе данных для получения объектов Table.
         - serializer_class: Сериализатор для преобразования данных.
+        - pagination_class:  Ограничивает количество объектов на странице.
     """
     queryset = Table.objects.all()
     serializer_class = TableSerializers
+    pagination_class = MyPagination

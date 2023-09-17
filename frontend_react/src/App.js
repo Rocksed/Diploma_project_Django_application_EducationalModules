@@ -1,32 +1,55 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import AddDataForm from './AddDataForm';
-import './App.css'; // Импорт стилей
+import './App.css';
 
 class App extends Component {
-  // Изначальное состояние компонента
   state = {
-    details: [], // Данные из API
-    filterColumn: 'name', // Столбец для фильтрации по умолчанию
-    filterCondition: 'contains', // Условие фильтрации по умолчанию
-    filterValue: '', // Значение фильтра по умолчанию
+    details: [],
+    filterColumn: 'name',
+    filterCondition: 'contains',
+    filterValue: '',
+    currentPage: 1,
+    totalPages: 1,
   };
 
-  // Метод жизненного цикла, вызывается после монтирования компонента
   componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.filterColumn !== this.state.filterColumn ||
+      prevState.filterCondition !== this.state.filterCondition ||
+      prevState.filterValue !== this.state.filterValue ||
+      prevState.currentPage !== this.state.currentPage
+    ) {
+      this.fetchData();
+    }
+  }
+
+  fetchData = () => {
+    const { filterColumn, filterCondition, filterValue, currentPage } = this.state;
+
+    const params = {
+      page: currentPage,
+      [filterColumn]: filterValue,
+      condition: filterCondition,
+    };
+
     axios
-      .get('http://localhost:8000/api/table/')
+      .get('http://localhost:8000/api/table/', { params })
       .then((res) => {
         this.setState({
-          details: res.data,
+          details: res.data.results,
+          totalPages: res.data.total_pages,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
-  // Обработчик добавления новых данных
   handleAddData = (newData) => {
     axios
       .post('http://localhost:8000/api/table/', newData)
@@ -40,7 +63,6 @@ class App extends Component {
       });
   };
 
-  // Обработчики изменения значений фильтрации
   handleFilterColumnChange = (e) => {
     this.setState({ filterColumn: e.target.value });
   };
@@ -53,7 +75,10 @@ class App extends Component {
     this.setState({ filterValue: e.target.value });
   };
 
-  // Функция фильтрации данных
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
   filterData = () => {
     const { filterColumn, filterCondition, filterValue, details } = this.state;
     return details.filter(row => {
@@ -72,9 +97,8 @@ class App extends Component {
     });
   };
 
-  // Отрисовка компонента
   render() {
-    const filteredData = this.filterData();
+    const { details, totalPages, currentPage } = this.state;
 
     return (
       <div className="app-container">
@@ -124,7 +148,7 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((output, id) => (
+            {this.filterData().map((output, id) => (
               <tr key={id}>
                 <td>{output.date}</td>
                 <td>{output.name}</td>
@@ -135,6 +159,15 @@ class App extends Component {
           </tbody>
         </table>
         <AddDataForm onAdd={this.handleAddData} />
+        <div className="pagination-container">
+          <button onClick={() => this.handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            Предыдущая
+          </button>
+          <span>Страница {currentPage} из {totalPages}</span>
+          <button onClick={() => this.handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Следующая
+          </button>
+        </div>
       </div>
     );
   }
