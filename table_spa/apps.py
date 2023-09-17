@@ -10,6 +10,6 @@ class TableSpaConfig(AppConfig):
         from django.core.management import call_command
 
         try:
-            call_command('db')
+            call_command('db')  # Запуск команды для применения миграций
         except ProgrammingError:
-            pass
+            pass  # Если миграции еще не были созданы

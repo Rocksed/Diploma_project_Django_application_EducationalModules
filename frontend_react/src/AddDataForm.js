@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
+// Компонент формы для добавления данных
 class AddDataForm extends Component {
+  // Изначальное состояние формы
   state = {
     date: '',
     name: '',
@@ -8,13 +10,16 @@ class AddDataForm extends Component {
     distance: '',
   };
 
+  // Обработчик изменения значений в инпутах
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // Обработчик отправки формы
   handleSubmit = (e) => {
     e.preventDefault();
 
+    // Создание нового объекта данных на основе введенных значений
     const newData = {
       date: this.state.date,
       name: this.state.name,
@@ -22,8 +27,10 @@ class AddDataForm extends Component {
       distance: this.state.distance,
     };
 
+    // Передача новых данных в родительский компонент через props.onAdd
     this.props.onAdd(newData);
 
+    // Сброс состояния формы
     this.setState({
       date: '',
       name: '',
@@ -32,6 +39,7 @@ class AddDataForm extends Component {
     });
   };
 
+  // Отрисовка формы
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

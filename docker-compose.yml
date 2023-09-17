@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
@@ -16,31 +16,38 @@ services:
       timeout: 5s
       retries: 5
 
-
   app:
     build:
       context: .
       dockerfile: Dockerfile
     network_mode: host
+    image: app
     container_name: drf
-    depends_on:
-      db:
-        condition: service_healthy
     env_file:
       - .env
     ports:
       - "8000:8000"
     volumes:
       - .:/code
+    depends_on:
+      db:
+        condition: service_healthy
     command: python manage.py runserver 0.0.0.0:8000
 
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  node:
+    build: ./frontend_react
+    # имя контейнера
+    container_name: reactapp
+    # порты
     ports:
-      - "3000:3000"
-    command: npm start 0.0.0.0:3000
-
-
+      - 3000:3000
+    # команда при запуске
+    command: npm start
+    # зависимость
+    depends_on:
+      - app
+# создаём два volume для статики
+volumes:
+  django_static_volume:
+  django_media_volume:

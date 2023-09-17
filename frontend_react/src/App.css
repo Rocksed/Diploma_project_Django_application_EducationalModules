@@ -1,0 +1,200 @@
+/* Стиль для контейнера приложения */
+.App {
+  text-align: center;
+}
+
+/* Стиль для логотипа */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* Анимация для логотипа */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* Стиль для заголовка приложения */
+.App-header {
+  background-color: #282c34; /* Цвет фона заголовка */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white; /* Цвет текста заголовка */
+}
+
+/* Стиль для ссылок */
+.App-link {
+  color: #61dafb; /* Цвет ссылок */
+}
+
+/* Анимация вращения логотипа */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Стиль для основного содержимого */
+body {
+  font-family: Arial, sans-serif; /* Шрифт */
+  text-align: center;
+}
+
+/* Стиль для заголовка */
+header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Стиль для формы */
+form {
+  margin: 20px auto;
+  max-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Стиль для ввода текста */
+input {
+  width: calc(100% - 10px);
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+/* Стиль для кнопки */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Цвет фона кнопки */
+  color: #fff; /* Цвет текста кнопки */
+  border: none;
+  cursor: pointer;
+}
+
+/* Стиль для кнопки при наведении */
+button:hover {
+  background-color: #0056b3; /* Цвет фона кнопки при наведении */
+}
+
+/* Стиль для разделительной линии */
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc; /* Цвет линии и её толщина */
+}
+
+/* Стиль для абзацев */
+p {
+  margin: 5px 0;
+}
+
+/* Стиль для блока данных */
+div > div {
+  border: 1px solid #ccc; /* Граница блока данных */
+  border-radius: 5px; /* Скругление углов блока данных */
+  padding: 10px;
+  margin: 10px 0; /* Отступы блока данных */
+}
+
+
+/* Стиль для контейнера формы фильтрации */
+.filter-form {
+  margin-bottom: 20px; /* Пример отступа между формой и данными */
+  padding: 10px;
+  background-color: #f0f0f0; /* Цвет фона формы */
+  border: 1px solid #ccc; /* Граница формы */
+  border-radius: 4px; /* Скругление углов формы */
+}
+
+/* Стиль для выпадающего списка */
+.filter-select {
+  margin-right: 10px; /* Отступ справа от выпадающего списка */
+}
+
+/* Стиль для текстового поля */
+.filter-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Стиль для кнопок */
+.filter-button {
+  padding: 5px 10px;
+  background-color: #007bff; /* Цвет кнопки */
+  color: white; /* Цвет текста на кнопке */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Стиль для заголовка формы */
+.filter-header {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/* Стиль для разделения между столбцами и строками */
+.app-container {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-select {
+  margin-top: 5px;
+}
+
+input[type="text"] {
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #000;
+}
+
+th, td {
+  padding: 10px;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+td {
+  text-align: center;
+}
