@@ -13,7 +13,6 @@ class TableListCreateView(generics.ListCreateAPIView):
     Атрибуты:
         - queryset: Запрос к базе данных для получения объектов Table.
         - serializer_class: Сериализатор для преобразования данных.
-
     """
     queryset = Table.objects.all()
     serializer_class = TableSerializers

@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     network_mode: host
-    image: app
     container_name: drf
     env_file:
       - .env
@@ -15,18 +14,24 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - postgres
+      - db
     command: python manage.py runserver 0.0.0.0:8000
 
 
-  postgres:
-    image: "postgres"
-    ports:
-      - 5432:5432
+  db:
+    image: postgres:14-alpine3.17
+    container_name: db_app
     env_file:
       - .env
     volumes:
-      - psql:/var/lib/postgresql/data
+      - ./db_django:/var/lib/mysql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
 
@@ -42,8 +47,3 @@ services:
     # зависимость
     depends_on:
       - app
-# создаём два volume для статики
-volumes:
-  django_static_volume:
-  django_media_volume:
-  psql:

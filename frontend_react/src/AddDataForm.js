@@ -53,7 +53,7 @@ class AddDataForm extends Component {
         <input
           type="text"
           name="name"
-          placeholder="Имя"
+          placeholder="Название"
           value={this.state.name}
           onChange={this.handleChange}
         />

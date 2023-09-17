@@ -78,7 +78,7 @@ class App extends Component {
 
     return (
       <div className="app-container">
-        <header className="app-header">Таблица результатов</header>
+        <header className="app-header">Таблица</header>
         <div className="filter-container">
           <label className="filter-label">
             Фильтровать по столбцу:
@@ -87,7 +87,6 @@ class App extends Component {
               value={this.state.filterColumn}
               onChange={this.handleFilterColumnChange}
             >
-              <option value="date">Дата</option>
               <option value="name">Название</option>
               <option value="quantity">Количество</option>
               <option value="distance">Расстояние</option>
@@ -100,7 +99,6 @@ class App extends Component {
               value={this.state.filterCondition}
               onChange={this.handleFilterConditionChange}
             >
-              <option value="equals">Равно</option>
               <option value="contains">Содержит</option>
               <option value="greater">Больше</option>
               <option value="less">Меньше</option>

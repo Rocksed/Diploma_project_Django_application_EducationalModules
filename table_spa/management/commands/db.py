@@ -10,7 +10,7 @@ class Command(BaseCommand):
         for _ in range(10):  # Задайте нужное количество записей
             data = {
                 'date': fake.date_this_year(),
-                'name': fake.name(),
+                'name': fake.company(),
                 'quantity': fake.random_int(min=1, max=100),
                 'distance': fake.random_int(min=1, max=1000),
             }
